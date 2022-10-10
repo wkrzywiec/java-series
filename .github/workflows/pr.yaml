@@ -1,0 +1,24 @@
+name: Build
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  qa:
+    uses: wkrzywiec/gh-workflows/.github/workflows/java-gradle.yaml@main
+    with:
+      app-name: java-series
+    secrets:
+      sonarToken: ${{ secrets.SONAR_TOKEN }}
+      githubToken: ${{ secrets.GITHUB_TOKEN }}
+
+  formatting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2 # v2 minimum required
+      - uses: axel-op/googlejavaformat-action@v3
+        with:
+          args: "--set-exit-if-changed"

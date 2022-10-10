@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'idea'
+    id "org.sonarqube" version "3.4.0.2513"
 }
 
 repositories {
@@ -14,4 +15,12 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "wkrzywiec_java-series"
+        property "sonar.organization", "wkrzywiec"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
 }

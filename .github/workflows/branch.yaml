@@ -1,16 +1,12 @@
-name: Build
+name: Test - feature branch
 on:
   push:
-    branches:
+    branches-ignore:
       - 'main'
-  pull_request:
   workflow_dispatch:
 
 jobs:
   qa:
-    uses: wkrzywiec/gh-workflows/.github/workflows/java-gradle.yaml@main
+    uses: wkrzywiec/gh-workflows/.github/workflows/java-gradle-branch.yaml@main
     with:
       app-name: java-series
-    secrets:
-      sonarToken: ${{ secrets.SONAR_TOKEN }}
-      githubToken: ${{ secrets.GITHUB_TOKEN }}

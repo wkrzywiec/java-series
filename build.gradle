@@ -58,3 +58,5 @@ spotless {
         licenseHeader '/* Wojciech Krzywiec $YEAR */' // or licenseHeaderFile
     }
 }
+
+test.dependsOn spotlessApply

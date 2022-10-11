@@ -7,6 +7,8 @@ Repo with various Java examples
 
 ## Usage
 
+### Code style with `Spotless`
+
 ## Contributing
 
 ## License

@@ -54,8 +54,6 @@ spotless {
         removeUnusedImports()
         googleJavaFormat()
         formatAnnotations()
-
-        licenseHeader '/* Wojciech Krzywiec $YEAR */' // or licenseHeaderFile
     }
 }
 

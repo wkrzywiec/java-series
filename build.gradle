@@ -1,0 +1,60 @@
+plugins {
+    id 'java'
+    id 'idea'
+
+    id 'jacoco'
+    id "org.sonarqube" version "3.4.0.2513"
+    id "com.diffplug.spotless" version "6.11.0"
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
+    dependsOn = [
+            'test'
+    ]
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.7
+            }
+        }
+    }
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "wkrzywiec_java-series"
+        property "sonar.organization", "wkrzywiec"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
+}
+
+spotless {
+    java {
+        // Use the default importOrder configuration
+        importOrder()
+        removeUnusedImports()
+        googleJavaFormat()
+        formatAnnotations()
+    }
+}
+
+test.dependsOn spotlessApply

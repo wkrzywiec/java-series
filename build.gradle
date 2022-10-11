@@ -4,6 +4,7 @@ plugins {
 
     id 'jacoco'
     id "org.sonarqube" version "3.4.0.2513"
+    id "com.diffplug.spotless" version "6.11.0"
 }
 
 repositories {
@@ -43,5 +44,17 @@ sonarqube {
         property "sonar.projectKey", "wkrzywiec_java-series"
         property "sonar.organization", "wkrzywiec"
         property "sonar.host.url", "https://sonarcloud.io"
+    }
+}
+
+spotless {
+    java {
+        // Use the default importOrder configuration
+        importOrder()
+        removeUnusedImports()
+        googleJavaFormat()
+        formatAnnotations()
+
+        licenseHeader '/* Wojciech Krzywiec $YEAR */' // or licenseHeaderFile
     }
 }
